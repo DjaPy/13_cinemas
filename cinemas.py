@@ -1,11 +1,12 @@
-import requests
-from bs4 import BeautifulSoup as bs
+from collections import defaultdict
 from datetime import datetime, timedelta
 import re
+import requests
+from bs4 import BeautifulSoup as bs
 
 
 def get_date_for_search():
-    delta_days = 30
+    delta_days = 20
     current_date = datetime.now().date()
     initial_date = (datetime.now() - timedelta(days=delta_days)).date()
     return  current_date, initial_date
@@ -27,9 +28,8 @@ def parse_afisha_list(afisha_html):
         title_movie = movie('h3', {'class': 'usetags'})[0].get_text()
         count_cinemas = len(movie('td',{'class': 'b-td-item'},'a'))
         if int(count_cinemas) >= good_count_cinemas:
-            dict_info_movies = {'title': title_movie,
-                                'number_cinemas': count_cinemas}
-            info_movies_afisha.append(dict_info_movies)
+            info_movie = (title_movie, {'number_cinemas': count_cinemas})
+            info_movies_afisha.append(info_movie)
     return info_movies_afisha
 
 
@@ -43,7 +43,7 @@ def fetch_movie_info(last_month, current_month):
 
 
 def get_films_in_kinopoisk(kinopoisk_content, initial_date, current_date):
-    good_rate = 7.0
+    good_rate = 5.0
     content = bs(kinopoisk_content, 'html.parser')
     content_movies = content.find_all('div', {'class': 'premier_item'})
     info_movies_kinopoisk = []
@@ -51,35 +51,52 @@ def get_films_in_kinopoisk(kinopoisk_content, initial_date, current_date):
         title = movie.find('span').text
         start_date = movie.find('meta').get('content')
         raiting = movie.find('u').text.split()[0]
-        raiting = raiting.
+        if re.search('\W.',raiting) is None:
+            raiting = '0'
         start_date = datetime.strptime(start_date,"%Y-%m-%d").date()
         if current_date >= start_date >= initial_date and float(raiting) >= good_rate:
-            dict_info_movies = {'title': title,
-                                'raiting': raiting}
-            info_movies_kinopoisk.append(dict_info_movies)
+            info_movie = (title, {'raiting' : raiting})
+            info_movies_kinopoisk.append(info_movie)
     return info_movies_kinopoisk
 
 
-def get_list_title(list):
-    title_list = []
-    for title in list:
-        title = title.get('title')
-        title_list.append(title)
-    return title_list
-
-
 def get_pop_movies(list_afisha, list_kinopoisk):
-    title_list_afisha = get_list_title(list_afisha)
-    title_list_kinopoisk = get_list_title(list_kinopoisk)
-    common_list = list(set(title_list_afisha)&set(title_list_kinopoisk))
-    return common_list
+    common_title_list = list_afisha + list_kinopoisk
+    common_info_list = defaultdict(list)
+    for title, info_movie in common_title_list:
+        common_info_list[title].append(info_movie)
+    common_info_list = sorted(common_info_list.items())
+    return common_info_list
 
 
-def output_movies_to_console(movies):
-    pass
+def get_preform(movies):
+    output_list_films = []
+    for film in movies:
+        try:
+            raiting = film[1][1]
+            output_list_films.append(film)
+        except IndexError:
+            continue
+    return output_list_films
+
+
+def output_movies_to_console(output_list):
+    for film, info in output_list:
+        movie = 'Film: {}'.format(film)
+        rate = 'Kinopoisk raiting: {}'.format(info[1]['raiting'])
+        count_cinemas = 'Show in {} cinemas in Moscow'.format(info[0]['number_cinemas'])
+        print(movie)
+        print(rate)
+        print(count_cinemas + '\n')
+        print()
+
+
+
+
 
 
 if __name__ == '__main__':
+
     current_date, initial_date = get_date_for_search()
     current_month = datetime.today().timetuple()[1]
     last_month = current_month - 1
@@ -87,6 +104,10 @@ if __name__ == '__main__':
     list_kinopoisk = get_films_in_kinopoisk(kinopoisk_content, initial_date, current_date)
     afisha_content = fetch_afisha_page()
     list_afisha = parse_afisha_list(afisha_content)
-    print(get_pop_movies(list_afisha, list_kinopoisk))
+    movies = get_pop_movies(list_afisha, list_kinopoisk)
+    output_list = get_preform(movies)
+    output_movies_to_console(output_list)
+
+
 
 
