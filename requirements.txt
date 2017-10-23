@@ -1,0 +1,12 @@
+beautifulsoup4==4.6.0
+certifi==2017.7.27.1
+chardet==3.0.4
+future==0.16.0
+idna==2.5
+kinopoiskpy==0.6.7
+lxml==4.1.0
+python-dateutil==2.6.1
+requests==2.17.3
+simplejson==3.11.1
+six==1.11.0
+urllib3==1.21.1
