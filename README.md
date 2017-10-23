@@ -25,43 +25,39 @@ python cinemas.py
 ```
 
 ```
-Film: My Little Pony в кино
-Kinopoisk raiting: 6.93
-Show in 135 cinemas in Moscow
-
-Film: Аритмия
+Film: РђСЂРёС‚РјРёСЏ
 Kinopoisk raiting: 7.99
 Show in 82 cinemas in Moscow
 
-Film: Бегущий по лезвию 2049
+Film: Р‘РµРіСѓС‰РёР№ РїРѕ Р»РµР·РІРёСЋ 2049
 Kinopoisk raiting: 7.88
 Show in 122 cinemas in Moscow
 
-Film: Геошторм
+Film: Р“РµРѕС€С‚РѕСЂРј
 Kinopoisk raiting: 5.91
 Show in 149 cinemas in Moscow
 
-Film: Голем
+Film: Р“РѕР»РµРј
 Kinopoisk raiting: 6.04
 Show in 94 cinemas in Moscow
 
-Film: Двуличный любовник
+Film: Р”РІСѓР»РёС‡РЅС‹Р№ Р»СЋР±РѕРІРЅРёРє
 Kinopoisk raiting: 6.66
 Show in 62 cinemas in Moscow
 
-Film: Дом призраков
+Film: Р”РѕРј РїСЂРёР·СЂР°РєРѕРІ
 Kinopoisk raiting: 4.89
 Show in 39 cinemas in Moscow
 
-Film: Жизнь впереди
+Film: Р–РёР·РЅСЊ РІРїРµСЂРµРґРё
 Kinopoisk raiting: 6.26
 Show in 50 cinemas in Moscow
 
-Film: Заклятье. Наши дни
+Film: Р—Р°РєР»СЏС‚СЊРµ. РќР°С€Рё РґРЅРё
 Kinopoisk raiting: 4.98
 Show in 61 cinemas in Moscow
 
-Film: Между нами горы
+Film: РњРµР¶РґСѓ РЅР°РјРё РіРѕСЂС‹
 Kinopoisk raiting: 6.64
 Show in 37 cinemas in Moscow
 ```
