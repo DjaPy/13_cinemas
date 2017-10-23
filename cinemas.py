@@ -43,7 +43,7 @@ def fetch_movie_info(last_month, current_month):
 
 
 def get_films_in_kinopoisk(kinopoisk_content, initial_date, current_date):
-    good_rate = 5.0
+    good_rate = 3.0
     content = bs(kinopoisk_content, 'html.parser')
     content_movies = content.find_all('div', {'class': 'premier_item'})
     info_movies_kinopoisk = []
@@ -81,18 +81,13 @@ def get_preform(movies):
 
 
 def output_movies_to_console(output_list):
-    for film, info in output_list:
+    for film, info in output_list[:10]:
         movie = 'Film: {}'.format(film)
         rate = 'Kinopoisk raiting: {}'.format(info[1]['raiting'])
         count_cinemas = 'Show in {} cinemas in Moscow'.format(info[0]['number_cinemas'])
         print(movie)
         print(rate)
         print(count_cinemas + '\n')
-        print()
-
-
-
-
 
 
 if __name__ == '__main__':
@@ -107,7 +102,3 @@ if __name__ == '__main__':
     movies = get_pop_movies(list_afisha, list_kinopoisk)
     output_list = get_preform(movies)
     output_movies_to_console(output_list)
-
-
-
-
