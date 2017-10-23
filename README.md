@@ -1,6 +1,71 @@
 # Cinemas
+The sripts selects 10 popular films that go to cinemas.
 
-[TODO. There will be project description]
+# How to intstall
+
+Use Venv or virtualenv for insulation project. Virtualenv example:
+```
+$ python virtualevn myenv
+$ source myenv/bin/activate
+```
+
+Install requirements:
+
+```
+pip install -r requirements.txt
+```
+
+If you have error, you need enter sudo before command.
+
+# Quick launch
+
+
+```
+python cinemas.py
+```
+
+```
+Film: My Little Pony в кино
+Kinopoisk raiting: 6.93
+Show in 135 cinemas in Moscow
+
+Film: Аритмия
+Kinopoisk raiting: 7.99
+Show in 82 cinemas in Moscow
+
+Film: Бегущий по лезвию 2049
+Kinopoisk raiting: 7.88
+Show in 122 cinemas in Moscow
+
+Film: Геошторм
+Kinopoisk raiting: 5.91
+Show in 149 cinemas in Moscow
+
+Film: Голем
+Kinopoisk raiting: 6.04
+Show in 94 cinemas in Moscow
+
+Film: Двуличный любовник
+Kinopoisk raiting: 6.66
+Show in 62 cinemas in Moscow
+
+Film: Дом призраков
+Kinopoisk raiting: 4.89
+Show in 39 cinemas in Moscow
+
+Film: Жизнь впереди
+Kinopoisk raiting: 6.26
+Show in 50 cinemas in Moscow
+
+Film: Заклятье. Наши дни
+Kinopoisk raiting: 4.98
+Show in 61 cinemas in Moscow
+
+Film: Между нами горы
+Kinopoisk raiting: 6.64
+Show in 37 cinemas in Moscow
+```
+
 
 # Project Goals
 
