@@ -50,12 +50,12 @@ def get_films_in_kinopoisk(kinopoisk_content, initial_date, current_date):
     for movie in content_movies:
         title = movie.find('span').text
         start_date = movie.find('meta').get('content')
-        raiting = movie.find('u').text.split()[0]
-        if re.search('\W.',raiting) is None:
-            raiting = '0'
+        rating = movie.find('u').text.split()[0]
+        if re.search('\W.',rating) is None:
+            rating = '0'
         start_date = datetime.strptime(start_date,"%Y-%m-%d").date()
-        if current_date >= start_date >= initial_date and float(raiting) >= good_rate:
-            info_movie = (title, {'raiting' : raiting})
+        if current_date >= start_date >= initial_date and float(rating) >= good_rate:
+            info_movie = (title, {'rating' : rating})
             info_movies_kinopoisk.append(info_movie)
     return info_movies_kinopoisk
 
@@ -70,21 +70,26 @@ def get_pop_movies(list_afisha, list_kinopoisk):
 
 
 def get_preform(movies):
+    count_of_information_units = 2
     output_list_films = []
     for film in movies:
-        try:
-            raiting = film[1][1]
-            output_list_films.append(film)
-        except IndexError:
-            continue
+        title_film, info_about_film = film
+        if len(info_about_film) == count_of_information_units:
+            count_cinemas = info_about_film[0]
+            rate = info_about_film[1]
+            output_dict_film = {}
+            output_dict_film.update(count_cinemas)
+            output_dict_film.update(rate)
+            output_dict_film.update(title_film=title_film)
+            output_list_films.append(output_dict_film)
     return output_list_films
 
 
 def output_movies_to_console(output_list):
-    for film, info in output_list[:10]:
-        movie = 'Film: {}'.format(film)
-        rate = 'Kinopoisk raiting: {}'.format(info[1]['raiting'])
-        count_cinemas = 'Show in {} cinemas in Moscow'.format(info[0]['number_cinemas'])
+    for film in output_list[:10]:
+        movie = 'Film: {}'.format(film['title_film'])
+        rate = 'Kinopoisk rating: {}'.format(film['rating'])
+        count_cinemas = 'Show in {} cinemas in Moscow'.format(film['number_cinemas'])
         print(movie)
         print(rate)
         print(count_cinemas + '\n')
@@ -93,7 +98,7 @@ def output_movies_to_console(output_list):
 if __name__ == '__main__':
 
     current_date, initial_date = get_date_for_search()
-    current_month = datetime.today().timetuple()[1]
+    current_month = datetime.today().month
     last_month = current_month - 1
     kinopoisk_content = fetch_movie_info(last_month,current_month)
     list_kinopoisk = get_films_in_kinopoisk(kinopoisk_content, initial_date, current_date)
