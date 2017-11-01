@@ -62,6 +62,23 @@ Kinopoisk raiting: 6.64
 Show in 37 cinemas in Moscow
 ```
 
+# Settings for deep search
+
+List of arguments:
+- `-h, --help` - list of all commands;
+- `-d, --day` - The number of days in cinemas;
+- `-c, --count` - The number of cinemas which show the film;
+- `-r, --rating` - Minimal movie rating;
+
+
+**The initial settings.**
+
+The data which are used, if you are added to the arguments when calling the script.
+```
+- day - 21
+- count - 30
+- rating - 3.00
+```
 
 # Project Goals
 
